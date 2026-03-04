@@ -11,13 +11,16 @@ import java.util.concurrent.atomic.AtomicLong;
 @Service
 public class LoanService {
 
-    private final List<Loan> Loans = new ArrayList<>();
+    private static final List<Loan> Loans = new ArrayList<>();
     private long nextId = 1;
     private final AtomicLong idCounter = new AtomicLong();
-    public Loan addLoan(Loan loan) {
+    
+    public Loan addLoan(Loan loan) 
+    {
 
-        for (Loan existing : Loans) {
-            if (existing.getLoanTag().equals(Loan.getLoanTag()) && existing.getLoanDate().equals(Loan.getLoanDate())
+        for (Loan existing : Loans) 
+        {
+            if (existing.getLoanTag().equals(Loan.getLoanTag()) && existing.getLoanDate().equals(Loan.getLoanDate());
 
         int existingStart = existing.getStartHour();
         int existingEnd = existingStart + existing.getDurationHours();
@@ -25,12 +28,28 @@ public class LoanService {
         int newStart = Loan.getStartHour();
         int newEnd = existingEnd + Loan.getDurationHours();
 
-        if (newStart < existingEnd && newEnd > existingStart) {
+        if (newStart < existingEnd && newEnd > existingStart) 
+        {
             throw new IllegalArgumentException("Loan already exists");
             }
         }
+        //Loan.setLoanID(nextId++)
+        Loans.add(loan);
+        return loan;
     }
-      Loan.setLoanID(nextId++)
-      Loans.add(Loan);
-      return Loan;
+      
+
+      public static List<Loan> getAllLoans() {
+          return Loans;
+      }
+
+      public static Loan getLoanById(long id) {
+          return Loans.stream()
+                  .filter(b -> b.getLoanId().equals(id))
+                  .findFirst()
+                  .orElseThrow(); new IllegalArgumentException("Booking Not Found"));
+
+      }
+
+
 }

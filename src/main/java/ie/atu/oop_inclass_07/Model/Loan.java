@@ -29,4 +29,9 @@ public class Loan {
 
     @Positive(message = "Must be over 0")
     private int DurationHours;
+
+
+    public Object getLoanId() {
+        return LoanID;
+    }
 }
